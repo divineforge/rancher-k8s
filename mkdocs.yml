@@ -1,0 +1,78 @@
+site_name: Rancher & Kubernetes Research
+site_description: Enterprise Kubernetes Platform Evaluation for Banking
+site_author: XCatalyst R&D Unit
+repo_url: https://github.com/divineforge/rancher-k8s
+repo_name: rancher-k8s
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - tags
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - Architecture:
+      - Overview: architecture/index.md
+      - Rancher Components: architecture/rancher-components.md
+      - Cluster Topology: architecture/cluster-topology.md
+      - Hybrid Cloud Model: architecture/hybrid-cloud.md
+  - Security:
+      - Overview: security/index.md
+      - RBAC & Authentication: security/rbac-auth.md
+      - Network Policies: security/network-policies.md
+      - Secrets Management: security/secrets.md
+      - Audit Logging: security/audit-logging.md
+  - Operations:
+      - Overview: operations/index.md
+      - Monitoring Stack: operations/monitoring.md
+      - Backup & DR: operations/backup-dr.md
+      - Day 2 Operations: operations/day2-ops.md
+  - Developer Experience:
+      - Overview: developer/index.md
+      - Onboarding Flow: developer/onboarding.md
+      - CI/CD Integration: developer/cicd.md
+      - Self-Service Model: developer/self-service.md
+  - Decisions:
+      - Why Rancher: decisions/why-rancher.md
+      - Alternatives Considered: decisions/alternatives.md
+      - Risk Assessment: decisions/risks.md
+  - Progress:
+      - Week 1 Research: progress/week1.md
+      - Week 2 Validation: progress/week2.md
+      - Next Steps: progress/next-steps.md
