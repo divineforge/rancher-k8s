@@ -47,11 +47,17 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Getting Started:
+      - Overview: getting-started/index.md
+      - Rancher Hosted Service: getting-started/rancher-hosted.md
+      - MacBook M1 Pro Setup: getting-started/macbook-m1.md
+      - Bare Metal Setup: getting-started/bare-metal-setup.md
   - Architecture:
       - Overview: architecture/index.md
       - Rancher Components: architecture/rancher-components.md
       - Cluster Topology: architecture/cluster-topology.md
       - Hybrid Cloud Model: architecture/hybrid-cloud.md
+      - Bare Metal Management: architecture/bare-metal.md
   - Security:
       - Overview: security/index.md
       - RBAC & Authentication: security/rbac-auth.md

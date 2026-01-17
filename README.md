@@ -30,7 +30,8 @@ Automatically deploys to GitHub Pages on push to `main` branch.
 
 ## Documentation Sections
 
-- **Architecture** - Platform design and components
+- **Getting Started** - Quick start guides for Rancher (hosted service, MacBook M1, bare metal)
+- **Architecture** - Platform design, components, and bare metal management
 - **Security** - Compliance and access control
 - **Operations** - Monitoring, backup, day-2 ops
 - **Developer Experience** - Onboarding and workflows
@@ -45,3 +46,7 @@ This is a living document. Update as research progresses:
 2. Preview locally with `mkdocs serve`
 3. Commit and push to your branch
 4. Create PR to `main` for review
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
