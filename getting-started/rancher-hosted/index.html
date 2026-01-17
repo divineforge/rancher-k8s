@@ -1,0 +1,2973 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Enterprise Kubernetes Platform Evaluation for Banking">
+      
+      
+        <meta name="author" content="XCatalyst R&D Unit">
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../macbook-m1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Rancher Hosted Service - Rancher & Kubernetes Research</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rancher-hosted-service-quick-start" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Rancher &amp; Kubernetes Research" class="md-header__button md-logo" aria-label="Rancher & Kubernetes Research" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rancher & Kubernetes Research
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Rancher Hosted Service
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/divineforge/rancher-k8s" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rancher-k8s
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../security/" class="md-tabs__link">
+          
+  
+  
+  Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../operations/" class="md-tabs__link">
+          
+  
+  
+  Operations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer/" class="md-tabs__link">
+          
+  
+  
+  Developer Experience
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/why-rancher/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../progress/week1/" class="md-tabs__link">
+          
+  
+  
+  Progress
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rancher &amp; Kubernetes Research" class="md-nav__button md-logo" aria-label="Rancher & Kubernetes Research" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Rancher & Kubernetes Research
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/divineforge/rancher-k8s" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rancher-k8s
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rancher Hosted Service
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rancher Hosted Service
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-rancher-hosted-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Rancher Hosted Service?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is Rancher Hosted Service?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Get
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-dont-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Don't Get
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-Step Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-sign-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Sign Up
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-access-rancher-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Access Rancher UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-a-test-cluster-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Create a Test Cluster (Options)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Create a Test Cluster (Options)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-use-a-cloud-provider-free-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Use a Cloud Provider Free Tier
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-use-k3s-on-a-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Use K3s on a VM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-use-minikubek3s-locally-for-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: Use Minikube/K3s Locally (For Testing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-import-cluster-to-rancher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Import Cluster to Rancher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-explore-rancher-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Explore Rancher Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5: Explore Rancher Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App Catalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#projects-namespaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projects &amp; Namespaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-can-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Learn
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can Learn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rancher-ui-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Rancher UI Exploration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-cluster-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Multi-Cluster Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitops-with-fleet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ GitOps with Fleet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-cant-learn-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can't Learn (Limitations)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can&#39;t Learn (Limitations)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rancher-server-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Rancher Server Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-infrastructure-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Full Infrastructure Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Advanced Networking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cost Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cost Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#free-trial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Free Trial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paid-plans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paid Plans
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bankingenterprise-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banking/Enterprise Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Banking/Enterprise Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Pros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Cons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-import-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Import Fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-not-connecting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Not Connecting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-after-hosted-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps After Hosted Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../macbook-m1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MacBook M1 Pro Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bare-metal-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bare Metal Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/rancher-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rancher Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/cluster-topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cluster Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/hybrid-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Cloud Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bare Metal Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/rbac-auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RBAC & Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/network-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Policies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secrets Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/audit-logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/backup-dr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & DR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/day2-ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 2 Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Experience
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Experience
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Onboarding Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/cicd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/self-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Service Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/why-rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Rancher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/alternatives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alternatives Considered
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/risks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risk Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progress
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progress/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progress/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progress/next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-rancher-hosted-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Rancher Hosted Service?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is Rancher Hosted Service?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Get
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-dont-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Don't Get
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-Step Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-sign-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Sign Up
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-access-rancher-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Access Rancher UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-a-test-cluster-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Create a Test Cluster (Options)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Create a Test Cluster (Options)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-use-a-cloud-provider-free-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Use a Cloud Provider Free Tier
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-use-k3s-on-a-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Use K3s on a VM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-use-minikubek3s-locally-for-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: Use Minikube/K3s Locally (For Testing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-import-cluster-to-rancher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Import Cluster to Rancher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-explore-rancher-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Explore Rancher Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5: Explore Rancher Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App Catalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#projects-namespaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projects &amp; Namespaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-can-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Learn
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can Learn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rancher-ui-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Rancher UI Exploration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-cluster-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Multi-Cluster Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitops-with-fleet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ GitOps with Fleet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-cant-learn-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can't Learn (Limitations)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can&#39;t Learn (Limitations)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rancher-server-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Rancher Server Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-infrastructure-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Full Infrastructure Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Advanced Networking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cost Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cost Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#free-trial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Free Trial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paid-plans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paid Plans
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bankingenterprise-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banking/Enterprise Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Banking/Enterprise Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Pros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Cons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-import-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Import Fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-not-connecting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Not Connecting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-after-hosted-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps After Hosted Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="rancher-hosted-service-quick-start">Rancher Hosted Service (Quick Start)<a class="headerlink" href="#rancher-hosted-service-quick-start" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The fastest way to start with Rancher - no infrastructure required. Perfect for exploring the UI and understanding multi-cluster management.</p>
+<p><strong>Time Required:</strong> 5-10 minutes
+<strong>Cost:</strong> Free trial available
+<strong>Skill Level:</strong> Beginner</p>
+<hr />
+<h2 id="what-is-rancher-hosted-service">What is Rancher Hosted Service?<a class="headerlink" href="#what-is-rancher-hosted-service" title="Permanent link">&para;</a></h2>
+<p>SUSE offers a cloud-hosted Rancher management server at <strong>cloud.rancher.com</strong> (previously known as Rancher Prime Hosted).</p>
+<h3 id="what-you-get">What You Get<a class="headerlink" href="#what-you-get" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Fully managed Rancher Server (no installation needed)</li>
+<li>✅ Highly available (SUSE manages infrastructure)</li>
+<li>✅ Automatic updates</li>
+<li>✅ Multi-cluster management UI</li>
+<li>✅ Free trial for evaluation</li>
+</ul>
+<h3 id="what-you-dont-get">What You Don't Get<a class="headerlink" href="#what-you-dont-get" title="Permanent link">&para;</a></h3>
+<ul>
+<li>❌ You don't control the Rancher Server infrastructure</li>
+<li>❌ You still need to bring your own Kubernetes clusters</li>
+<li>❌ Limited to import/register existing clusters (can't provision from scratch)</li>
+</ul>
+<p><strong>Think of it as:</strong> Rancher-as-a-Service</p>
+<hr />
+<h2 id="step-by-step-setup">Step-by-Step Setup<a class="headerlink" href="#step-by-step-setup" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-sign-up">Step 1: Sign Up<a class="headerlink" href="#step-1-sign-up" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Visit <strong>https://www.rancher.com/products/rancher-hosted</strong></li>
+<li>Click <strong>"Try Rancher Prime Hosted"</strong></li>
+<li>Sign up with:</li>
+<li>Email address</li>
+<li>GitHub account</li>
+<li>Google account</li>
+</ol>
+<p><strong>Note:</strong> Check if trial is available, or contact SUSE sales for evaluation access</p>
+<hr />
+<h3 id="step-2-access-rancher-ui">Step 2: Access Rancher UI<a class="headerlink" href="#step-2-access-rancher-ui" title="Permanent link">&para;</a></h3>
+<p>Once signed up:</p>
+<ol>
+<li>Log in to <strong>https://cloud.rancher.com</strong> (or your provided URL)</li>
+<li>You'll see the Rancher Dashboard</li>
+<li>Default view: <strong>Cluster Management</strong></li>
+</ol>
+<p><strong>What you're seeing:</strong> A hosted Rancher management server with no downstream clusters yet</p>
+<hr />
+<h3 id="step-3-create-a-test-cluster-options">Step 3: Create a Test Cluster (Options)<a class="headerlink" href="#step-3-create-a-test-cluster-options" title="Permanent link">&para;</a></h3>
+<p>Since Rancher Hosted only <strong>manages</strong> clusters, you need to bring your own Kubernetes cluster to import. Here are quick options:</p>
+<h4 id="option-a-use-a-cloud-provider-free-tier">Option A: Use a Cloud Provider Free Tier<a class="headerlink" href="#option-a-use-a-cloud-provider-free-tier" title="Permanent link">&para;</a></h4>
+<p><strong>Google Kubernetes Engine (GKE) - Free tier:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create GKE cluster (free tier: 1 zonal cluster)</span>
+gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>create<span class="w"> </span>rancher-demo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--zone<span class="w"> </span>us-central1-a<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--num-nodes<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--machine-type<span class="w"> </span>e2-medium
+
+<span class="c1"># Get credentials</span>
+gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>get-credentials<span class="w"> </span>rancher-demo<span class="w"> </span>--zone<span class="w"> </span>us-central1-a
+</code></pre></div></p>
+<p><strong>Amazon EKS - Free tier (EC2 costs apply):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using eksctl</span>
+eksctl<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>rancher-demo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>us-west-2<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--nodes<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--node-type<span class="w"> </span>t3.medium
+</code></pre></div></p>
+<p><strong>Azure AKS - Free tier (node costs apply):</strong>
+<div class="highlight"><pre><span></span><code>az<span class="w"> </span>aks<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--resource-group<span class="w"> </span>rancher-demo-rg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>rancher-demo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--node-count<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--node-vm-size<span class="w"> </span>Standard_B2s
+</code></pre></div></p>
+<hr />
+<h4 id="option-b-use-k3s-on-a-vm">Option B: Use K3s on a VM<a class="headerlink" href="#option-b-use-k3s-on-a-vm" title="Permanent link">&para;</a></h4>
+<p><strong>DigitalOcean Droplet ($4/month):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># SSH into droplet</span>
+ssh<span class="w"> </span>root@your-droplet-ip
+
+<span class="c1"># Install K3s</span>
+curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-
+
+<span class="c1"># Get kubeconfig</span>
+cat<span class="w"> </span>/etc/rancher/k3s/k3s.yaml
+</code></pre></div>
+<p>Copy the kubeconfig to your local machine and replace <code>127.0.0.1</code> with the droplet's IP.</p>
+<hr />
+<h4 id="option-c-use-minikubek3s-locally-for-testing">Option C: Use Minikube/K3s Locally (For Testing)<a class="headerlink" href="#option-c-use-minikubek3s-locally-for-testing" title="Permanent link">&para;</a></h4>
+<p><strong>Note:</strong> Local clusters can't be accessed by Rancher Hosted directly unless you expose them via tunneling (not recommended for evaluation)</p>
+<p><strong>Better approach:</strong> Use this to learn kubectl, then import a cloud cluster to Rancher Hosted</p>
+<hr />
+<h3 id="step-4-import-cluster-to-rancher">Step 4: Import Cluster to Rancher<a class="headerlink" href="#step-4-import-cluster-to-rancher" title="Permanent link">&para;</a></h3>
+<p>Once you have a Kubernetes cluster:</p>
+<ol>
+<li><strong>In Rancher UI:</strong> Click <strong>"Cluster Management"</strong></li>
+<li>Click <strong>"Import Existing"</strong></li>
+<li>Give your cluster a name (e.g., "demo-cluster")</li>
+<li>Click <strong>"Create"</strong></li>
+<li><strong>Copy the kubectl command</strong> shown (looks like this):</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://cloud.rancher.com/v3/import/abc123xyz...
+</code></pre></div>
+<ol>
+<li><strong>Run the command</strong> on your Kubernetes cluster (where you have kubectl access)</li>
+<li>Wait 30-60 seconds</li>
+<li>Cluster appears in Rancher UI with status <strong>"Active"</strong></li>
+</ol>
+<p><strong>What just happened:</strong> Rancher installed an agent on your cluster that communicates back to the hosted Rancher server</p>
+<hr />
+<h3 id="step-5-explore-rancher-features">Step 5: Explore Rancher Features<a class="headerlink" href="#step-5-explore-rancher-features" title="Permanent link">&para;</a></h3>
+<p>Now that your cluster is connected, explore:</p>
+<h4 id="cluster-dashboard"><strong>Cluster Dashboard</strong><a class="headerlink" href="#cluster-dashboard" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Click on your cluster name</li>
+<li>View: Nodes, pods, deployments, events</li>
+<li>Real-time metrics (if metrics server is installed)</li>
+</ul>
+<h4 id="app-catalog"><strong>App Catalog</strong><a class="headerlink" href="#app-catalog" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Go to <strong>Apps → Charts</strong></li>
+<li>Try deploying sample apps:</li>
+<li><strong>nginx</strong> (web server)</li>
+<li><strong>redis</strong> (cache)</li>
+<li><strong>wordpress</strong> (CMS)</li>
+</ul>
+<p><strong>Example: Deploy nginx:</strong>
+1. Apps → Charts → nginx
+2. Click "Install"
+3. Select namespace (create new: "web-apps")
+4. Click "Install"
+5. Check <strong>Workloads → Deployments</strong> to see it running</p>
+<h4 id="user-management"><strong>User Management</strong><a class="headerlink" href="#user-management" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Go to <strong>Users &amp; Authentication</strong></li>
+<li>Add users (if evaluating multi-tenancy)</li>
+<li>Test different permission levels</li>
+</ul>
+<h4 id="projects-namespaces"><strong>Projects &amp; Namespaces</strong><a class="headerlink" href="#projects-namespaces" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Create a <strong>Project</strong> (e.g., "Development")</li>
+<li>Projects group multiple namespaces</li>
+<li>Assign users to projects with roles</li>
+</ul>
+<hr />
+<h2 id="what-you-can-learn">What You Can Learn<a class="headerlink" href="#what-you-can-learn" title="Permanent link">&para;</a></h2>
+<h3 id="rancher-ui-exploration">✅ Rancher UI Exploration<a class="headerlink" href="#rancher-ui-exploration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multi-cluster dashboard</li>
+<li>Workload management</li>
+<li>Monitoring and logging integration</li>
+<li>RBAC and user management</li>
+</ul>
+<h3 id="multi-cluster-management">✅ Multi-Cluster Management<a class="headerlink" href="#multi-cluster-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Import multiple clusters (cloud + on-prem)</li>
+<li>Consistent RBAC across clusters</li>
+<li>Centralized app catalog</li>
+</ul>
+<h3 id="gitops-with-fleet">✅ GitOps with Fleet<a class="headerlink" href="#gitops-with-fleet" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Deploy apps via Git repositories</li>
+<li>Multi-cluster deployments</li>
+<li>Continuous reconciliation</li>
+</ul>
+<hr />
+<h2 id="what-you-cant-learn-limitations">What You Can't Learn (Limitations)<a class="headerlink" href="#what-you-cant-learn-limitations" title="Permanent link">&para;</a></h2>
+<h3 id="rancher-server-management">❌ Rancher Server Management<a class="headerlink" href="#rancher-server-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>You don't install or maintain Rancher</li>
+<li>Can't customize server configuration</li>
+<li>Limited to features SUSE enables</li>
+</ul>
+<h3 id="full-infrastructure-control">❌ Full Infrastructure Control<a class="headerlink" href="#full-infrastructure-control" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Can't test HA configurations for Rancher</li>
+<li>Can't test backup/restore of Rancher server</li>
+<li>Can't test air-gapped installations</li>
+</ul>
+<h3 id="advanced-networking">❌ Advanced Networking<a class="headerlink" href="#advanced-networking" title="Permanent link">&para;</a></h3>
+<ul>
+<li>No control over Rancher's network configuration</li>
+<li>Can't test custom load balancers</li>
+<li>Firewall rules are managed by SUSE</li>
+</ul>
+<p><strong>Verdict:</strong> Great for UI evaluation, not for production validation</p>
+<hr />
+<h2 id="cost-considerations">Cost Considerations<a class="headerlink" href="#cost-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="free-trial">Free Trial<a class="headerlink" href="#free-trial" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Typically 30-60 days</li>
+<li>Check with SUSE for current offerings</li>
+<li>May require credit card for verification</li>
+</ul>
+<h3 id="paid-plans">Paid Plans<a class="headerlink" href="#paid-plans" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pricing based on number of nodes managed</li>
+<li>Support tier included</li>
+<li>Contact SUSE sales for enterprise pricing</li>
+</ul>
+<p><strong>Tip:</strong> Use free trial to evaluate, then decide between hosted vs self-hosted for production</p>
+<hr />
+<h2 id="bankingenterprise-considerations">Banking/Enterprise Considerations<a class="headerlink" href="#bankingenterprise-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="pros">✅ Pros<a class="headerlink" href="#pros" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SUSE manages security patches</li>
+<li>High availability included</li>
+<li>No ops burden for Rancher server</li>
+<li>Compliance (check SUSE's certifications)</li>
+</ul>
+<h3 id="cons">⚠️ Cons<a class="headerlink" href="#cons" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Data flows through SUSE infrastructure</li>
+<li>Dependency on SUSE uptime</li>
+<li>May not meet data sovereignty requirements</li>
+<li>Limited control for audits</li>
+</ul>
+<p><strong>Recommendation:</strong> Good for dev/staging, likely not approved for production banking workloads (check with InfoSec)</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="cluster-import-fails">Cluster Import Fails<a class="headerlink" href="#cluster-import-fails" title="Permanent link">&para;</a></h3>
+<p><strong>Error:</strong> "Cluster not reachable"</p>
+<p><strong>Fix:</strong>
+- Ensure your cluster has outbound internet access
+- Check firewall allows traffic to <code>*.rancher.com</code>
+- Verify kubectl command was run on correct cluster</p>
+<hr />
+<h3 id="agent-not-connecting">Agent Not Connecting<a class="headerlink" href="#agent-not-connecting" title="Permanent link">&para;</a></h3>
+<p><strong>Error:</strong> "Waiting for agent to connect"</p>
+<p><strong>Fix:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check agent pods on your cluster</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>cattle-system
+
+<span class="c1"># Check agent logs</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>cattle-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>cattle-cluster-agent
+</code></pre></div></p>
+<p>Common issues:
+- Network connectivity
+- Certificate problems
+- Insufficient permissions</p>
+<hr />
+<h2 id="next-steps-after-hosted-service">Next Steps After Hosted Service<a class="headerlink" href="#next-steps-after-hosted-service" title="Permanent link">&para;</a></h2>
+<p>Once comfortable with Rancher UI:</p>
+<ol>
+<li><strong>Try local development:</strong> <a href="../macbook-m1/">MacBook M1 Setup</a></li>
+<li><strong>Deploy production test:</strong> <a href="../bare-metal-setup/">Bare Metal Setup</a></li>
+<li><strong>Learn architecture:</strong> <a href="../../architecture/rancher-components/">Rancher Components</a></li>
+</ol>
+<hr />
+<h2 id="additional-resources">Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://ranchermanager.docs.rancher.com/">Rancher Prime Hosted Documentation</a></li>
+<li><a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/register-existing-clusters">Import Existing Cluster Guide</a></li>
+<li><a href="https://www.suse.com/support/">SUSE Support Portal</a></li>
+</ul>
+<hr />
+<p><strong>Estimated Learning Time:</strong> 2-4 hours of hands-on exploration
+<strong>Cost:</strong> Free (trial) + cloud cluster costs (~$5-20/month)
+<strong>Best for:</strong> UI familiarization, not production validation</p>
+<p><strong>Status:</strong> Quick start guide
+<strong>Last Updated:</strong> January 2026</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3518 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Enterprise Kubernetes Platform Evaluation for Banking">
+      
+      
+        <meta name="author" content="XCatalyst R&D Unit">
+      
+      
+      
+        <link rel="prev" href="../rancher-hosted/">
+      
+      
+        <link rel="next" href="../bare-metal-setup/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>MacBook M1 Pro Setup - Rancher & Kubernetes Research</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#macbook-m1-pro-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Rancher &amp; Kubernetes Research" class="md-header__button md-logo" aria-label="Rancher & Kubernetes Research" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rancher & Kubernetes Research
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MacBook M1 Pro Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/divineforge/rancher-k8s" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rancher-k8s
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../security/" class="md-tabs__link">
+          
+  
+  
+  Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../operations/" class="md-tabs__link">
+          
+  
+  
+  Operations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer/" class="md-tabs__link">
+          
+  
+  
+  Developer Experience
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/why-rancher/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../progress/week1/" class="md-tabs__link">
+          
+  
+  
+  Progress
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rancher &amp; Kubernetes Research" class="md-nav__button md-logo" aria-label="Rancher & Kubernetes Research" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Rancher & Kubernetes Research
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/divineforge/rancher-k8s" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rancher-k8s
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rancher-hosted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rancher Hosted Service
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MacBook M1 Pro Setup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MacBook M1 Pro Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-options-for-m1-macs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Options for M1 Macs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Options for M1 Macs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-rancher-desktop-recommended-for-beginners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: Rancher Desktop (Recommended for Beginners)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-docker-desktop-k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: Docker Desktop + K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-3-colima-k3s-lightweight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3: Colima + K3s (Lightweight)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-4-multipass-k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4: Multipass + K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-1-rancher-desktop-easiest-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: Rancher Desktop (Easiest Start)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1: Rancher Desktop (Easiest Start)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-can-do-with-rancher-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Do with Rancher Desktop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can Do with Rancher Desktop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-sample-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy Sample Applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-helm-charts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Helm Charts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-rancher-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Rancher Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-2-docker-desktop-k3s-most-compatible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: Docker Desktop + K3s (Most Compatible)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: Docker Desktop + K3s (Most Compatible)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-can-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Learn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting Docker Desktop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-3-colima-k3s-lightweight-free" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3: Colima + K3s (Lightweight &amp; Free)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 3: Colima + K3s (Lightweight &amp; Free)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-choose-colima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Choose Colima?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-4-multipass-k3s-most-production-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4: Multipass + K3s (Most Production-Like)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 4: Multipass + K3s (Most Production-Like)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-choose-multipass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Choose Multipass?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Comparison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-can-learn-on-macbook-m1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Learn on MacBook M1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can Learn on MacBook M1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Kubernetes Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Application Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rancher-features-if-rancher-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Rancher Features (if Rancher installed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Development Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-cant-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can't Learn
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can&#39;t Learn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ High Availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-cluster-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Multi-Cluster Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Production Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Enterprise Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-m1-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices for M1 Learning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for M1 Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Resource Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-local-image-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use Local Image Registry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-optimize-for-arm-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Optimize for ARM Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-project-deploy-wordpress-on-m1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample Project: Deploy WordPress on M1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting Common Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-imagepullbackoff-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue: "ImagePullBackOff" errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-slow-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue: Slow performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-connection-refused-to-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue: "connection refused" to services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bare-metal-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bare Metal Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/rancher-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rancher Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/cluster-topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cluster Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/hybrid-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Cloud Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bare Metal Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/rbac-auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RBAC & Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/network-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Policies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secrets Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/audit-logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/backup-dr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & DR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/day2-ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 2 Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Experience
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Experience
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Onboarding Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/cicd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/self-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Service Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/why-rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Rancher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/alternatives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alternatives Considered
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/risks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risk Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progress
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progress/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progress/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progress/next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-options-for-m1-macs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Options for M1 Macs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Options for M1 Macs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-rancher-desktop-recommended-for-beginners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: Rancher Desktop (Recommended for Beginners)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-docker-desktop-k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: Docker Desktop + K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-3-colima-k3s-lightweight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3: Colima + K3s (Lightweight)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-4-multipass-k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4: Multipass + K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-1-rancher-desktop-easiest-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: Rancher Desktop (Easiest Start)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1: Rancher Desktop (Easiest Start)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-can-do-with-rancher-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Do with Rancher Desktop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can Do with Rancher Desktop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-sample-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy Sample Applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-helm-charts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Helm Charts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-rancher-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Rancher Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-2-docker-desktop-k3s-most-compatible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: Docker Desktop + K3s (Most Compatible)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: Docker Desktop + K3s (Most Compatible)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-can-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Learn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting Docker Desktop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-3-colima-k3s-lightweight-free" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3: Colima + K3s (Lightweight &amp; Free)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 3: Colima + K3s (Lightweight &amp; Free)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-choose-colima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Choose Colima?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-4-multipass-k3s-most-production-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4: Multipass + K3s (Most Production-Like)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 4: Multipass + K3s (Most Production-Like)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-choose-multipass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Choose Multipass?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Comparison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-can-learn-on-macbook-m1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can Learn on MacBook M1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can Learn on MacBook M1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Kubernetes Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Application Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rancher-features-if-rancher-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Rancher Features (if Rancher installed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Development Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-cant-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Can't Learn
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What You Can&#39;t Learn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ High Availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-cluster-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Multi-Cluster Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Production Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Enterprise Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-m1-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices for M1 Learning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for M1 Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Resource Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-local-image-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use Local Image Registry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-optimize-for-arm-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Optimize for ARM Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-project-deploy-wordpress-on-m1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample Project: Deploy WordPress on M1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting Common Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-imagepullbackoff-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue: "ImagePullBackOff" errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-slow-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue: Slow performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-connection-refused-to-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue: "connection refused" to services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="macbook-m1-pro-setup">MacBook M1 Pro Setup<a class="headerlink" href="#macbook-m1-pro-setup" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Run Kubernetes and Rancher locally on your MacBook M1 Pro. Perfect for learning, development, and testing without cloud costs.</p>
+<p><strong>Time Required:</strong> 30-60 minutes
+<strong>Cost:</strong> Free (uses local resources)
+<strong>Hardware:</strong> MacBook M1/M2/M3 Pro with 16GB+ RAM recommended</p>
+<hr />
+<h2 id="architecture-options-for-m1-macs">Architecture Options for M1 Macs<a class="headerlink" href="#architecture-options-for-m1-macs" title="Permanent link">&para;</a></h2>
+<h3 id="option-1-rancher-desktop-recommended-for-beginners">Option 1: Rancher Desktop (Recommended for Beginners)<a class="headerlink" href="#option-1-rancher-desktop-recommended-for-beginners" title="Permanent link">&para;</a></h3>
+<p><strong>What:</strong> All-in-one Kubernetes + container runtime
+<strong>Pros:</strong> Simplest setup, GUI, includes Rancher dashboard
+<strong>Cons:</strong> Resource-heavy, opinionated</p>
+<h3 id="option-2-docker-desktop-k3s">Option 2: Docker Desktop + K3s<a class="headerlink" href="#option-2-docker-desktop-k3s" title="Permanent link">&para;</a></h3>
+<p><strong>What:</strong> Docker Desktop with K3s cluster
+<strong>Pros:</strong> Most compatible, well-documented
+<strong>Cons:</strong> Docker Desktop licensing for enterprise use</p>
+<h3 id="option-3-colima-k3s-lightweight">Option 3: Colima + K3s (Lightweight)<a class="headerlink" href="#option-3-colima-k3s-lightweight" title="Permanent link">&para;</a></h3>
+<p><strong>What:</strong> Open-source Docker Desktop alternative
+<strong>Pros:</strong> Free, lightweight, fast
+<strong>Cons:</strong> Less GUI support</p>
+<h3 id="option-4-multipass-k3s">Option 4: Multipass + K3s<a class="headerlink" href="#option-4-multipass-k3s" title="Permanent link">&para;</a></h3>
+<p><strong>What:</strong> Canonical's VM manager with K3s
+<strong>Pros:</strong> Closest to real infrastructure
+<strong>Cons:</strong> VM overhead</p>
+<hr />
+<h2 id="option-1-rancher-desktop-easiest-start">Option 1: Rancher Desktop (Easiest Start)<a class="headerlink" href="#option-1-rancher-desktop-easiest-start" title="Permanent link">&para;</a></h2>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1: Download Rancher Desktop</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using Homebrew (recommended)</span>
+brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>rancher-desktop
+
+<span class="c1"># Or download from:</span>
+<span class="c1"># https://rancherdesktop.io/</span>
+</code></pre></div>
+<p><strong>Step 2: Launch Rancher Desktop</strong></p>
+<ol>
+<li>Open Rancher Desktop from Applications</li>
+<li>On first launch, choose:</li>
+<li><strong>Container Runtime:</strong> containerd (recommended) or dockerd</li>
+<li><strong>Kubernetes Version:</strong> Latest stable (e.g., v1.28.x)</li>
+<li><strong>Memory:</strong> 6GB (8GB if you have 16GB RAM)</li>
+<li>
+<p><strong>CPUs:</strong> 4 cores</p>
+</li>
+<li>
+<p>Wait 2-3 minutes for Kubernetes to start</p>
+</li>
+<li>You'll see "Kubernetes is running" in the UI</li>
+</ol>
+<p><strong>Step 3: Verify Installation</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check Rancher Desktop provides kubectl</span>
+kubectl<span class="w"> </span>version
+
+<span class="c1"># Check nodes (you&#39;ll see 1 local node)</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+
+<span class="c1"># Expected output:</span>
+<span class="c1"># NAME                   STATUS   ROLE    AGE   VERSION</span>
+<span class="c1"># lima-rancher-desktop   Ready    &lt;all&gt;   1m    v1.28.x</span>
+</code></pre></div>
+<p><strong>Step 4: Access Rancher Dashboard</strong></p>
+<p>Rancher Desktop includes a local Rancher Manager instance:</p>
+<ol>
+<li>In Rancher Desktop UI, go to <strong>"Preferences"</strong></li>
+<li>Enable <strong>"Rancher Dashboard"</strong> (if not already enabled)</li>
+<li>Click <strong>"Launch Rancher"</strong> or go to <code>http://localhost:PORT</code></li>
+<li>Set admin password on first access</li>
+</ol>
+<p><strong>What you have now:</strong> A single-node Kubernetes cluster with Rancher UI running locally</p>
+<hr />
+<h3 id="what-you-can-do-with-rancher-desktop">What You Can Do with Rancher Desktop<a class="headerlink" href="#what-you-can-do-with-rancher-desktop" title="Permanent link">&para;</a></h3>
+<h4 id="deploy-sample-applications">Deploy Sample Applications<a class="headerlink" href="#deploy-sample-applications" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a namespace</span>
+kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>demo
+
+<span class="c1"># Deploy nginx</span>
+kubectl<span class="w"> </span>create<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--image<span class="o">=</span>nginx<span class="w"> </span>--namespace<span class="w"> </span>demo
+
+<span class="c1"># Expose as service</span>
+kubectl<span class="w"> </span>expose<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--type<span class="o">=</span>LoadBalancer<span class="w"> </span>--namespace<span class="w"> </span>demo
+
+<span class="c1"># Get service URL</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>demo
+
+<span class="c1"># Access nginx</span>
+open<span class="w"> </span>http://localhost:&lt;PORT&gt;
+</code></pre></div>
+<h4 id="use-helm-charts">Use Helm Charts<a class="headerlink" href="#use-helm-charts" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Rancher Desktop includes Helm</span>
+helm<span class="w"> </span>version
+
+<span class="c1"># Add Bitnami repo</span>
+helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>bitnami<span class="w"> </span>https://charts.bitnami.com/bitnami
+
+<span class="c1"># Install WordPress</span>
+helm<span class="w"> </span>install<span class="w"> </span>my-wordpress<span class="w"> </span>bitnami/wordpress<span class="w"> </span>--namespace<span class="w"> </span>demo
+</code></pre></div>
+<h4 id="test-rancher-features">Test Rancher Features<a class="headerlink" href="#test-rancher-features" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>App Catalog:</strong> Deploy apps from Rancher UI</li>
+<li><strong>Projects:</strong> Create projects and organize namespaces</li>
+<li><strong>Monitoring:</strong> Install Rancher Monitoring (Prometheus + Grafana)</li>
+<li><strong>Logging:</strong> Test log aggregation</li>
+</ol>
+<hr />
+<h3 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>❌ Single-node only (can't test HA)</li>
+<li>❌ Limited to ~8GB memory for Kubernetes</li>
+<li>❌ No multi-cluster management (only local cluster)</li>
+<li>⚠️ Performance not representative of production</li>
+</ul>
+<p><strong>Best for:</strong> Learning Kubernetes basics, testing Helm charts, UI exploration</p>
+<hr />
+<h2 id="option-2-docker-desktop-k3s-most-compatible">Option 2: Docker Desktop + K3s (Most Compatible)<a class="headerlink" href="#option-2-docker-desktop-k3s-most-compatible" title="Permanent link">&para;</a></h2>
+<h3 id="installation_1">Installation<a class="headerlink" href="#installation_1" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1: Install Docker Desktop</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Download from:</span>
+<span class="c1"># https://www.docker.com/products/docker-desktop/</span>
+
+<span class="c1"># Or via Homebrew</span>
+brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>docker
+</code></pre></div>
+<p>Launch Docker Desktop and enable Kubernetes:
+1. Docker Desktop → Settings → Kubernetes
+2. Check "Enable Kubernetes"
+3. Apply &amp; Restart (takes 3-5 minutes)</p>
+<p><strong>Step 2: Verify Kubernetes</strong></p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>current-context
+<span class="c1"># Should show: docker-desktop</span>
+
+kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<span class="c1"># Shows 1 node named docker-desktop</span>
+</code></pre></div>
+<p><strong>Step 3: Install Rancher (Optional)</strong></p>
+<p>Run Rancher Server in Docker:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run Rancher container</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--restart<span class="o">=</span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>rancher<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>rancher/rancher:latest
+
+<span class="c1"># Wait 2-3 minutes, then access:</span>
+open<span class="w"> </span>https://localhost
+
+<span class="c1"># Get bootstrap password</span>
+docker<span class="w"> </span>logs<span class="w"> </span>rancher<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Bootstrap Password:&quot;</span>
+</code></pre></div>
+<p><strong>Note:</strong> Accept the self-signed certificate warning in your browser</p>
+<hr />
+<h3 id="what-you-can-learn">What You Can Learn<a class="headerlink" href="#what-you-can-learn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Kubernetes fundamentals (pods, services, deployments)</li>
+<li>✅ kubectl commands</li>
+<li>✅ Helm chart deployments</li>
+<li>✅ Rancher UI (if you install Rancher container)</li>
+<li>✅ Docker workflow integration</li>
+</ul>
+<hr />
+<h3 id="troubleshooting-docker-desktop">Troubleshooting Docker Desktop<a class="headerlink" href="#troubleshooting-docker-desktop" title="Permanent link">&para;</a></h3>
+<p><strong>Issue:</strong> "Kubernetes is starting" stuck</p>
+<p><strong>Fix:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reset Kubernetes cluster</span>
+<span class="c1"># Docker Desktop → Settings → Kubernetes → Reset Kubernetes Cluster</span>
+</code></pre></div></p>
+<p><strong>Issue:</strong> High CPU/memory usage</p>
+<p><strong>Fix:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reduce resources in Docker Desktop settings</span>
+<span class="c1"># Settings → Resources</span>
+<span class="c1"># Set CPUs to 4, Memory to 6GB</span>
+</code></pre></div></p>
+<hr />
+<h2 id="option-3-colima-k3s-lightweight-free">Option 3: Colima + K3s (Lightweight &amp; Free)<a class="headerlink" href="#option-3-colima-k3s-lightweight-free" title="Permanent link">&para;</a></h2>
+<p>Colima is an open-source Docker Desktop alternative, perfect for M1 Macs.</p>
+<h3 id="installation_2">Installation<a class="headerlink" href="#installation_2" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1: Install Colima</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Colima and Docker CLI</span>
+brew<span class="w"> </span>install<span class="w"> </span>colima<span class="w"> </span>docker<span class="w"> </span>kubectl
+
+<span class="c1"># Install K3s</span>
+brew<span class="w"> </span>install<span class="w"> </span>k3s
+</code></pre></div>
+<p><strong>Step 2: Start Colima with Kubernetes</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Start Colima with K3s</span>
+colima<span class="w"> </span>start<span class="w"> </span>--kubernetes<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cpu<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--disk<span class="w"> </span><span class="m">50</span>
+
+<span class="c1"># This creates a Lima VM with K3s running inside</span>
+</code></pre></div>
+<p><strong>Step 3: Verify</strong></p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<span class="c1"># Shows colima node</span>
+
+docker<span class="w"> </span>ps
+<span class="c1"># Docker commands work via Colima</span>
+</code></pre></div>
+<p><strong>Step 4: Install Rancher (Optional)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Deploy Rancher using Helm</span>
+helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>rancher-latest<span class="w"> </span>https://releases.rancher.com/server-charts/latest
+kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>cattle-system
+
+helm<span class="w"> </span>install<span class="w"> </span>rancher<span class="w"> </span>rancher-latest/rancher<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--namespace<span class="w"> </span>cattle-system<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span><span class="nv">hostname</span><span class="o">=</span>rancher.local<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span><span class="nv">replicas</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span><span class="nv">bootstrapPassword</span><span class="o">=</span>admin
+
+<span class="c1"># Wait for Rancher to be ready</span>
+kubectl<span class="w"> </span>-n<span class="w"> </span>cattle-system<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/rancher
+
+<span class="c1"># Get Rancher URL</span>
+kubectl<span class="w"> </span>-n<span class="w"> </span>cattle-system<span class="w"> </span>get<span class="w"> </span>ingress
+<span class="c1"># Access at https://rancher.local (add to /etc/hosts)</span>
+</code></pre></div>
+<p><strong>Add to /etc/hosts:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get Colima IP</span>
+colima<span class="w"> </span>status
+
+<span class="c1"># Add to /etc/hosts</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/hosts
+<span class="c1"># Add line: 127.0.0.1 rancher.local</span>
+</code></pre></div></p>
+<p>Access: <code>https://rancher.local</code></p>
+<hr />
+<h3 id="why-choose-colima">Why Choose Colima?<a class="headerlink" href="#why-choose-colima" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>Lightweight:</strong> 2-3GB RAM vs 5-6GB for Docker Desktop</li>
+<li>✅ <strong>Free:</strong> No enterprise licensing concerns</li>
+<li>✅ <strong>Fast startup:</strong> ~30 seconds vs 2+ minutes for Docker Desktop</li>
+<li>✅ <strong>Native ARM support:</strong> Built for M1/M2/M3</li>
+<li>⚠️ <strong>Less GUI:</strong> Command-line focused</li>
+</ul>
+<p><strong>Best for:</strong> Developers who prefer CLI, want to avoid Docker Desktop licensing</p>
+<hr />
+<h2 id="option-4-multipass-k3s-most-production-like">Option 4: Multipass + K3s (Most Production-Like)<a class="headerlink" href="#option-4-multipass-k3s-most-production-like" title="Permanent link">&para;</a></h2>
+<h3 id="installation_3">Installation<a class="headerlink" href="#installation_3" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1: Install Multipass</strong></p>
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>multipass
+</code></pre></div>
+<p><strong>Step 2: Create VM with K3s</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Launch Ubuntu VM</span>
+multipass<span class="w"> </span>launch<span class="w"> </span>--name<span class="w"> </span>rancher-node<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cpus<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="w"> </span>8G<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--disk<span class="w"> </span>50G<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">22</span>.04
+
+<span class="c1"># Shell into VM</span>
+multipass<span class="w"> </span>shell<span class="w"> </span>rancher-node
+
+<span class="c1"># Install K3s inside VM</span>
+curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-
+
+<span class="c1"># Exit VM</span>
+<span class="nb">exit</span>
+</code></pre></div>
+<p><strong>Step 3: Get kubeconfig</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Copy kubeconfig from VM</span>
+multipass<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>rancher-node<span class="w"> </span>--<span class="w"> </span>sudo<span class="w"> </span>cat<span class="w"> </span>/etc/rancher/k3s/k3s.yaml<span class="w"> </span>&gt;<span class="w"> </span>k3s.yaml
+
+<span class="c1"># Get VM IP</span>
+<span class="nv">VM_IP</span><span class="o">=</span><span class="k">$(</span>multipass<span class="w"> </span>info<span class="w"> </span>rancher-node<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>IPv4<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+
+<span class="c1"># Replace 127.0.0.1 with VM IP</span>
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="s2">&quot;s/127.0.0.1/</span><span class="nv">$VM_IP</span><span class="s2">/&quot;</span><span class="w"> </span>k3s.yaml
+
+<span class="c1"># Set kubeconfig</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/k3s.yaml
+
+<span class="c1"># Test</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+</code></pre></div>
+<p><strong>Step 4: Install Rancher</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># From your Mac (not inside VM)</span>
+helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>rancher-latest<span class="w"> </span>https://releases.rancher.com/server-charts/latest
+
+kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>cattle-system
+kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>cert-manager
+
+<span class="c1"># Install cert-manager</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml
+
+<span class="c1"># Wait for cert-manager</span>
+kubectl<span class="w"> </span>-n<span class="w"> </span>cert-manager<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/cert-manager
+
+<span class="c1"># Install Rancher</span>
+helm<span class="w"> </span>install<span class="w"> </span>rancher<span class="w"> </span>rancher-latest/rancher<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--namespace<span class="w"> </span>cattle-system<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span><span class="nv">hostname</span><span class="o">=</span>rancher.local<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span><span class="nv">replicas</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span><span class="nv">bootstrapPassword</span><span class="o">=</span>admin
+
+<span class="c1"># Wait for Rancher</span>
+kubectl<span class="w"> </span>-n<span class="w"> </span>cattle-system<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/rancher
+</code></pre></div>
+<p><strong>Step 5: Access Rancher</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Port forward (or add to /etc/hosts)</span>
+kubectl<span class="w"> </span>-n<span class="w"> </span>cattle-system<span class="w"> </span>port-forward<span class="w"> </span>svc/rancher<span class="w"> </span><span class="m">8443</span>:443
+
+<span class="c1"># Open browser</span>
+open<span class="w"> </span>https://localhost:8443
+</code></pre></div>
+<hr />
+<h3 id="why-choose-multipass">Why Choose Multipass?<a class="headerlink" href="#why-choose-multipass" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>Most realistic:</strong> Separate VM mimics real infrastructure</li>
+<li>✅ <strong>Multi-node capable:</strong> Can create multiple VMs for HA testing</li>
+<li>✅ <strong>Snapshot support:</strong> Save VM states</li>
+<li>✅ <strong>Clean isolation:</strong> Doesn't interfere with Docker Desktop</li>
+<li>⚠️ <strong>More complex:</strong> Requires VM management knowledge</li>
+</ul>
+<p><strong>Best for:</strong> Learning production-like deployments, testing HA configurations</p>
+<hr />
+<h2 id="performance-comparison">Performance Comparison<a class="headerlink" href="#performance-comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>RAM Usage</th>
+<th>CPU Usage</th>
+<th>Startup Time</th>
+<th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rancher Desktop</strong></td>
+<td>5-6GB</td>
+<td>Medium</td>
+<td>2-3 min</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>Docker Desktop</strong></td>
+<td>4-5GB</td>
+<td>Medium</td>
+<td>2-3 min</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>Colima</strong></td>
+<td>2-3GB</td>
+<td>Low</td>
+<td>30 sec</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Multipass</strong></td>
+<td>6-8GB</td>
+<td>Medium</td>
+<td>1-2 min</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation for M1 Pro:</strong>
+- <strong>16GB RAM:</strong> Any option works, Rancher Desktop easiest
+- <strong>8GB RAM:</strong> Use Colima (lightest footprint)</p>
+<hr />
+<h2 id="what-you-can-learn-on-macbook-m1">What You Can Learn on MacBook M1<a class="headerlink" href="#what-you-can-learn-on-macbook-m1" title="Permanent link">&para;</a></h2>
+<h3 id="kubernetes-fundamentals">✅ Kubernetes Fundamentals<a class="headerlink" href="#kubernetes-fundamentals" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pods, services, deployments, ConfigMaps, secrets</li>
+<li>kubectl commands</li>
+<li>YAML manifest creation</li>
+<li>Debugging (logs, exec, describe)</li>
+</ul>
+<h3 id="application-deployment">✅ Application Deployment<a class="headerlink" href="#application-deployment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Containerize applications</li>
+<li>Deploy to Kubernetes</li>
+<li>Test CI/CD workflows</li>
+<li>Helm chart development</li>
+</ul>
+<h3 id="rancher-features-if-rancher-installed">✅ Rancher Features (if Rancher installed)<a class="headerlink" href="#rancher-features-if-rancher-installed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>UI navigation</li>
+<li>App catalog usage</li>
+<li>Project/namespace management</li>
+<li>Basic RBAC</li>
+</ul>
+<h3 id="development-workflow">✅ Development Workflow<a class="headerlink" href="#development-workflow" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Local inner loop (code → build → deploy → test)</li>
+<li>Hot reload setups</li>
+<li>Debugging in Kubernetes</li>
+</ul>
+<hr />
+<h2 id="what-you-cant-learn">What You Can't Learn<a class="headerlink" href="#what-you-cant-learn" title="Permanent link">&para;</a></h2>
+<h3 id="high-availability">❌ High Availability<a class="headerlink" href="#high-availability" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multi-master setups</li>
+<li>etcd clustering</li>
+<li>Load balancer configurations</li>
+</ul>
+<h3 id="multi-cluster-management">❌ Multi-Cluster Management<a class="headerlink" href="#multi-cluster-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Rancher managing multiple clusters</li>
+<li>Cross-cluster app deployment</li>
+<li>Global DNS</li>
+</ul>
+<h3 id="production-operations">❌ Production Operations<a class="headerlink" href="#production-operations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Real backup/restore scenarios</li>
+<li>Node failure handling</li>
+<li>Cluster upgrades at scale</li>
+</ul>
+<h3 id="enterprise-integration">❌ Enterprise Integration<a class="headerlink" href="#enterprise-integration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Active Directory integration</li>
+<li>Enterprise monitoring tools</li>
+<li>Physical network policies</li>
+</ul>
+<p><strong>Verdict:</strong> Great for 80% of learning, but need real infrastructure for production validation</p>
+<hr />
+<h2 id="best-practices-for-m1-learning">Best Practices for M1 Learning<a class="headerlink" href="#best-practices-for-m1-learning" title="Permanent link">&para;</a></h2>
+<h3 id="1-resource-management">1. Resource Management<a class="headerlink" href="#1-resource-management" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Don&#39;t run too many pods</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--all-namespaces<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<span class="c1"># Keep under 50 for smooth performance</span>
+
+<span class="c1"># Clean up regularly</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>namespace<span class="w"> </span>&lt;unused-namespaces&gt;
+docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a
+</code></pre></div>
+<h3 id="2-use-local-image-registry">2. Use Local Image Registry<a class="headerlink" href="#2-use-local-image-registry" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build images locally</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:latest<span class="w"> </span>.
+
+<span class="c1"># No need to push to Docker Hub for local testing</span>
+kubectl<span class="w"> </span>run<span class="w"> </span>myapp<span class="w"> </span>--image<span class="o">=</span>myapp:latest<span class="w"> </span>--image-pull-policy<span class="o">=</span>Never
+</code></pre></div>
+<h3 id="3-optimize-for-arm-architecture">3. Optimize for ARM Architecture<a class="headerlink" href="#3-optimize-for-arm-architecture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use ARM-compatible images</span>
+docker<span class="w"> </span>pull<span class="w"> </span>--platform<span class="o">=</span>linux/arm64<span class="w"> </span>nginx:latest
+
+<span class="c1"># Check image architecture</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>nginx:latest<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Architecture
+</code></pre></div>
+<hr />
+<h2 id="sample-project-deploy-wordpress-on-m1">Sample Project: Deploy WordPress on M1<a class="headerlink" href="#sample-project-deploy-wordpress-on-m1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Create namespace</span>
+kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>wordpress
+
+<span class="c1"># 2. Deploy MySQL</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Secret</span>
+<span class="s">metadata:</span>
+<span class="s">  name: mysql-secret</span>
+<span class="s">  namespace: wordpress</span>
+<span class="s">type: Opaque</span>
+<span class="s">data:</span>
+<span class="s">  password: $(echo -n &quot;MyPassword123&quot; | base64)</span>
+<span class="s">---</span>
+<span class="s">apiVersion: apps/v1</span>
+<span class="s">kind: Deployment</span>
+<span class="s">metadata:</span>
+<span class="s">  name: mysql</span>
+<span class="s">  namespace: wordpress</span>
+<span class="s">spec:</span>
+<span class="s">  selector:</span>
+<span class="s">    matchLabels:</span>
+<span class="s">      app: mysql</span>
+<span class="s">  template:</span>
+<span class="s">    metadata:</span>
+<span class="s">      labels:</span>
+<span class="s">        app: mysql</span>
+<span class="s">    spec:</span>
+<span class="s">      containers:</span>
+<span class="s">      - name: mysql</span>
+<span class="s">        image: mysql:8.0</span>
+<span class="s">        env:</span>
+<span class="s">        - name: MYSQL_ROOT_PASSWORD</span>
+<span class="s">          valueFrom:</span>
+<span class="s">            secretKeyRef:</span>
+<span class="s">              name: mysql-secret</span>
+<span class="s">              key: password</span>
+<span class="s">        - name: MYSQL_DATABASE</span>
+<span class="s">          value: wordpress</span>
+<span class="s">        ports:</span>
+<span class="s">        - containerPort: 3306</span>
+<span class="s">---</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Service</span>
+<span class="s">metadata:</span>
+<span class="s">  name: mysql</span>
+<span class="s">  namespace: wordpress</span>
+<span class="s">spec:</span>
+<span class="s">  selector:</span>
+<span class="s">    app: mysql</span>
+<span class="s">  ports:</span>
+<span class="s">  - port: 3306</span>
+<span class="s">EOF</span>
+
+<span class="c1"># 3. Deploy WordPress</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<span class="s">apiVersion: apps/v1</span>
+<span class="s">kind: Deployment</span>
+<span class="s">metadata:</span>
+<span class="s">  name: wordpress</span>
+<span class="s">  namespace: wordpress</span>
+<span class="s">spec:</span>
+<span class="s">  selector:</span>
+<span class="s">    matchLabels:</span>
+<span class="s">      app: wordpress</span>
+<span class="s">  template:</span>
+<span class="s">    metadata:</span>
+<span class="s">      labels:</span>
+<span class="s">        app: wordpress</span>
+<span class="s">    spec:</span>
+<span class="s">      containers:</span>
+<span class="s">      - name: wordpress</span>
+<span class="s">        image: wordpress:latest</span>
+<span class="s">        env:</span>
+<span class="s">        - name: WORDPRESS_DB_HOST</span>
+<span class="s">          value: mysql</span>
+<span class="s">        - name: WORDPRESS_DB_PASSWORD</span>
+<span class="s">          valueFrom:</span>
+<span class="s">            secretKeyRef:</span>
+<span class="s">              name: mysql-secret</span>
+<span class="s">              key: password</span>
+<span class="s">        ports:</span>
+<span class="s">        - containerPort: 80</span>
+<span class="s">---</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Service</span>
+<span class="s">metadata:</span>
+<span class="s">  name: wordpress</span>
+<span class="s">  namespace: wordpress</span>
+<span class="s">spec:</span>
+<span class="s">  type: LoadBalancer</span>
+<span class="s">  selector:</span>
+<span class="s">    app: wordpress</span>
+<span class="s">  ports:</span>
+<span class="s">  - port: 80</span>
+<span class="s">    targetPort: 80</span>
+<span class="s">EOF</span>
+
+<span class="c1"># 4. Access WordPress</span>
+kubectl<span class="w"> </span>-n<span class="w"> </span>wordpress<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>wordpress
+<span class="c1"># Open http://localhost:&lt;PORT&gt; in browser</span>
+</code></pre></div>
+<p><strong>What you learned:</strong>
+- Secrets management
+- Multi-tier application deployment
+- Service networking
+- LoadBalancer type services</p>
+<hr />
+<h2 id="troubleshooting-common-issues">Troubleshooting Common Issues<a class="headerlink" href="#troubleshooting-common-issues" title="Permanent link">&para;</a></h2>
+<h3 id="issue-imagepullbackoff-errors">Issue: "ImagePullBackOff" errors<a class="headerlink" href="#issue-imagepullbackoff-errors" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Pulling AMD64 images on ARM architecture</p>
+<p><strong>Fix:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use ARM-compatible images</span>
+<span class="c1"># Check Docker Hub for arm64 tags</span>
+docker<span class="w"> </span>pull<span class="w"> </span>--platform<span class="o">=</span>linux/arm64<span class="w"> </span>&lt;image&gt;
+</code></pre></div></p>
+<h3 id="issue-slow-performance">Issue: Slow performance<a class="headerlink" href="#issue-slow-performance" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reduce resource limits</span>
+<span class="c1"># Limit number of running pods</span>
+<span class="c1"># Increase RAM allocation to Kubernetes</span>
+</code></pre></div></p>
+<h3 id="issue-connection-refused-to-services">Issue: "connection refused" to services<a class="headerlink" href="#issue-connection-refused-to-services" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use port-forward for debugging</span>
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/&lt;service-name&gt;<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;
+
+<span class="c1"># Check service endpoints</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>endpoints<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;
+</code></pre></div></p>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After mastering local setup:</p>
+<ol>
+<li><strong>Import to Rancher Hosted:</strong> Connect your local cluster to <a href="../rancher-hosted/">Rancher Hosted Service</a></li>
+<li><strong>Deploy to Cloud:</strong> Try <a href="../bare-metal-setup/">Bare Metal Setup</a> guide</li>
+<li><strong>Learn Advanced Topics:</strong> <a href="../../security/">Security</a>, <a href="../../operations/">Operations</a></li>
+</ol>
+<hr />
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://docs.rancherdesktop.io/">Rancher Desktop Docs</a></li>
+<li><a href="https://github.com/abiosoft/colima">Colima GitHub</a></li>
+<li><a href="https://docs.k3s.io/">K3s Documentation</a></li>
+<li><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Kubernetes Basics</a></li>
+</ul>
+<hr />
+<p><strong>Estimated Learning Time:</strong> 1-2 weeks of daily experimentation
+<strong>Cost:</strong> Free (your Mac's resources)
+<strong>Best for:</strong> Learning Kubernetes, development workflows, Rancher UI basics</p>
+<p><strong>Status:</strong> Hands-on guide
+<strong>Last Updated:</strong> January 2026</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
